@@ -13,3 +13,8 @@ class Settings():
 
         self.CameraX = 10
         self.CameraY = 10
+
+        self.bullet_width = 30
+        self.bullet_height = 3
+        self.bullet_color = (123, 43, 12)
+

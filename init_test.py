@@ -2,6 +2,8 @@ import pygame, sys, os
 from settings import Settings
 from robin_hood import Robin_hood
 import game_functions as g_f
+from pygame.sprite import Group
+
 
 clock = pygame.time.Clock()
 
@@ -11,6 +13,7 @@ def init_game():
 
     game_settings = Settings()
     screen = pygame.display.set_mode((game_settings.width, game_settings.height))
+    bullets = Group()
     hero = Robin_hood(screen, game_settings)
     pygame.display.set_caption("The best game in the world")
     bg = pygame.image.load("img/_12_background.png").convert()
@@ -18,8 +21,8 @@ def init_game():
 
     x = 0
     while True:
-        g_f.check_events(hero, game_settings)
-        g_f.update_screen(screen, game_settings, hero)
+        g_f.check_events(hero, game_settings, bullets, screen)
+        g_f.update_screen(screen, game_settings, hero, bullets)
         #screen.blit(bg, (0 - game_settings.CameraX, 0 - game_settings.CameraY))
         screen.blit(hero.image, (hero.rect.x + game_settings.CameraX, hero.usr_y + game_settings.CameraY))
         pygame.display.flip()
