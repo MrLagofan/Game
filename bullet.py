@@ -8,12 +8,15 @@ class Bullet(Sprite):
         self.screen = screen
         self.settings = game_settings
 
-        self.rect = pygame.Rect(0, 0, game_settings.bullet_width, game_settings.bullet_height)
-        self.rect.x = hero.rect.x + 100
-        self.rect.y = hero.usr_y + 100
+        self.rect = pygame.image.load("img/arrow.png")
+        self.rect = pygame.transform.scale(self.rect, (40, 20))
+            #pygame.Rect(0, 0, game_settings.bullet_width, game_settings.bullet_height)
+        self.x = hero.rect.x + 100
+        self.y = hero.usr_y + 100
 
     def update(self):
-        self.rect.x += 6
+        self.x += 6
 
     def draw_bullet(self):
-        pygame.draw.rect(self.screen, self.settings.bullet_color, self.rect)
+        self.screen.blit(self.rect, (self.x, self.y))
+            #draw.rect(self.screen, self.settings.bullet_color, self.rect)
