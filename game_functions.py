@@ -1,7 +1,10 @@
 import pygame, sys
 from bullet import Bullet
+from enemy import Enemy
+
 
 def check_events(hero, game_settings, bullets, screen):
+
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             sys.exit()
@@ -26,11 +29,14 @@ def check_events(hero, game_settings, bullets, screen):
                 hero.moving_bottom = False
 
 
-def update_screen(screen, game_settings, hero, bullets):
+def update_screen(screen, game_settings, hero, bullets,enemy1):
+    enemy1.draw_enemy()
+    enemy1.update()
     if hero.make_jump:
         hero.jump()
     hero.update(screen)
     for bullet in bullets:
         bullet.draw_bullet()
         bullet.update()
+
     # hero.blitme()

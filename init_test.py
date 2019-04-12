@@ -3,7 +3,7 @@ from settings import Settings
 from robin_hood import Robin_hood
 import game_functions as g_f
 from pygame.sprite import Group
-
+from enemy import Enemy
 
 clock = pygame.time.Clock()
 
@@ -18,11 +18,12 @@ def init_game():
     pygame.display.set_caption("The best game in the world")
     bg = pygame.image.load("img/_12_background.png").convert()
     bg = pygame.transform.scale(bg, (1550, 900))
+    enemy1 = Enemy(screen, game_settings)
 
     x = 0
     while True:
         g_f.check_events(hero, game_settings, bullets, screen)
-        g_f.update_screen(screen, game_settings, hero, bullets)
+        g_f.update_screen(screen, game_settings, hero, bullets,enemy1)
         #screen.blit(bg, (0 - game_settings.CameraX, 0 - game_settings.CameraY))
         screen.blit(hero.image, (hero.rect.x + game_settings.CameraX, hero.usr_y + game_settings.CameraY))
         pygame.display.flip()
