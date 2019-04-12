@@ -29,14 +29,23 @@ def check_events(hero, game_settings, bullets, screen):
                 hero.moving_bottom = False
 
 
-def update_screen(screen, game_settings, hero, bullets,enemy1):
-    enemy1.draw_enemy()
-    enemy1.update()
+def update_screen(screen, game_settings, hero, bullets, enemy1):
+    if enemy1.lep:
+        enemy1.draw_enemy()
+        enemy1.update()
     if hero.make_jump:
         hero.jump()
     hero.update(screen)
     for bullet in bullets:
-        bullet.draw_bullet()
-        bullet.update()
+        if bullet.x > enemy1.x and bullet.y < enemy1.y + 200 and bullet.y > enemy1.y:
+             enemy1.lep = False
+             enemy1.x = 0
+             enemy1.y = 0
+             bullets.remove(bullet)
+
+        elif bullet.x != enemy1.x and (bullet.y < enemy1.y + 200 or bullet.y > enemy1.y):
+            bullet.draw_bullet()
+            bullet.update()
+
 
     # hero.blitme()

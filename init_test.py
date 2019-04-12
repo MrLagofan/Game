@@ -23,7 +23,7 @@ def init_game():
     x = 0
     while True:
         g_f.check_events(hero, game_settings, bullets, screen)
-        g_f.update_screen(screen, game_settings, hero, bullets,enemy1)
+        g_f.update_screen(screen, game_settings, hero, bullets, enemy1)
         #screen.blit(bg, (0 - game_settings.CameraX, 0 - game_settings.CameraY))
         screen.blit(hero.image, (hero.rect.x + game_settings.CameraX, hero.usr_y + game_settings.CameraY))
         pygame.display.flip()

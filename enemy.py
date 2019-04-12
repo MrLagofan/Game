@@ -8,10 +8,12 @@ class Enemy(Sprite):
         self.screen = screen
         self.g_s = game_settings
         self.image = pygame.image.load("img/enemy.png")
+        self.image = pygame.transform.scale(self.image, (200, 200))
         self.x = 600
         self.y = 400
         self.counter = 0
         self.counterbin = 1
+        self.lep = True
 
 
 
