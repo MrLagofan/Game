@@ -21,12 +21,12 @@ class Robin_hood():
 
         self.make_jump = False
         self.jump_counter = 30
-        self.usr_y = game_settings.height - 335
+        self.rect.y = game_settings.height - 360
 
 
 
     def blitme(self, bg):
-        self.screen.blit(self.image, (self.rect.x, self.usr_y))
+        self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
 
     def update(self, screen):
@@ -44,14 +44,15 @@ class Robin_hood():
             #self.rect.y += 3
             #self.g_s.CameraX += 6
 
-    def jump(self):
+    def jump(self, game_settings):
 
         if self.jump_counter >= -30:
-            self.usr_y -= self.jump_counter / 3
+            self.rect.y -= self.jump_counter / 3
             self.jump_counter -= 1
 
         else:
             self.jump_counter = 30
             self.make_jump = False
+            self.rect.y = game_settings.height - 360
 
 
