@@ -16,28 +16,27 @@ def init_game():
     game_settings = Settings()
     screen = pygame.display.set_mode((game_settings.width, game_settings.height))
     bullets = Group()
-    hero = Robin_hood(screen, game_settings)
     pygame.display.set_caption("The best game in the world")
     bg = pygame.image.load("img/_12_background.png").convert()
     bg = pygame.transform.scale(bg, (1600, 900))
     enemy1 = Enemy(screen, game_settings)
-
+    trap = Group()
     tiles = Group()
-    level1 = ["mmmmm",
-              "mmmmmmmmm"
-              "mmmmm",
-              "mmmm",
-              "mmmmm",
-              "mmmmm",
+    level1 = ["",
               "",
               "",
               "",
               "",
-              '',
-              "ZmmmgmgmmZmmma",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
               "bbbbbbbbbbbbbbbbbbbbbbbbbb",
               ]
     x = y = 0
+    hero = Robin_hood(screen, game_settings, tiles)
     for row in level1:
         for col in row:
             if col == "Z":
@@ -46,18 +45,17 @@ def init_game():
                 Tile(x, y, "barrel.png", tiles)
             elif col == "b":
                 Tile(x, y, "block.png", tiles)
-
             elif col == "g":
                 Tile(x, y, "grass.png", tiles)
-
-
+            elif col == "t":
+                Tile(x, y, "trap.png", trap)
             x += 64
         y += 64
         x = 0
 
     while True:
         g_f.check_events(hero, game_settings, bullets, screen)
-        g_f.update_screen(screen, game_settings, hero, bullets, enemy1,tiles)
+        g_f.update_screen(screen, game_settings, hero, bullets, enemy1,tiles,trap)
         #screen.blit(bg, (0 - game_settings.CameraX, 0 - game_settings.CameraY))
         screen.blit(hero.image, (hero.rect.x + game_settings.CameraX, hero.rect.y + game_settings.CameraY))
         pygame.display.flip()

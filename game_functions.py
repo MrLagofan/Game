@@ -16,6 +16,7 @@ def check_events(hero, game_settings, bullets, screen):
             if i.key == pygame.K_DOWN:
                 hero.moving_bottom = True
             if i.key == pygame.K_UP:
+                hero.rect.y -= 2
                 hero.make_jump = True
             if len(bullets) != 5:
                 if i.key == pygame.K_SPACE:
@@ -30,23 +31,30 @@ def check_events(hero, game_settings, bullets, screen):
                 hero.moving_bottom = False
 
 
-def update_screen(screen, game_settings, hero, bullets, enemy1, tiles):
+def update_screen(screen, game_settings, hero, bullets, enemy1, tiles, trap):
     for wall in tiles:
         screen.blit(wall.image, wall.rect)
-    if pygame.sprite.spritecollideany(hero, tiles,):
-        print("YES")
 
-        
+    for traps in trap:
+        screen.blit(traps.image, traps.rect)
 
-    else:
-        hero.rect.y += 1
+
+
+
+    if hero.make_jump:
+        hero.jump(game_settings)
+    if pygame.sprite.spritecollideany(hero,trap):
+        hero.rect.x = 0
+
+    if pygame.sprite.spritecollideany(hero,tiles):
+        if hero.make_jump:
+            hero.make_jump = False
+            hero.jump_counter = 30
 
     if enemy1.lep:
         enemy1.draw_enemy()
         enemy1.update()
-    if hero.make_jump:
-        hero.jump(game_settings)
-    hero.update(screen)
+    hero.update()
     for bullet in bullets:
         bullet.draw_bullet()
         if bullet.rect.y > 660:
